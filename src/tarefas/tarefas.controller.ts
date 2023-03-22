@@ -8,7 +8,7 @@ import {
 } from '@nestjs/common';
 import { TarefasService } from './tarefas.service';
 import { CreateTarefaDto } from './dto/create_tarefa.dto';
-import { Put } from '@nestjs/common/decorators';
+import { Delete, Put } from '@nestjs/common/decorators';
 import { TarefaEntity } from 'src/entities/tarefa.entity';
 
 @Controller('tarefas')
@@ -51,5 +51,14 @@ export class TarefasController {
     delete body.data;
 
     await this.tarefasService.updateTarefa(id, body);
+  }
+
+  @Delete()
+  async deleteTarefa(@Body() body) {
+    const id = body.id;
+    if (!id) {
+      throw new HttpException('ID não informado', 404);
+    }
+    await this.tarefasService.deleteTarefa(id);
   }
 }

@@ -23,8 +23,8 @@ export class TarefasService {
     return created;
   }
 
-  deleteTarefa(id: string) {
-    return id;
+  async deleteTarefa(id: string): Promise<void> {
+    await this.tarefaModel.findOneAndDelete({ _id: id });
   }
 
   async updateTarefa(id: string, tarefa: TarefaEntity): Promise<void> {
