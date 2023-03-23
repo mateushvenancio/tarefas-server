@@ -1,7 +1,7 @@
 export class UsuarioEntity {
   id: string;
   nome: string;
-  username: string;
+  email: string;
   password: string;
   createdAt: Date;
 }

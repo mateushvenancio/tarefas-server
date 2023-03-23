@@ -29,5 +29,6 @@ import { UsuarioSchema } from './schemes/usuario.schema';
     ]),
   ],
   providers: [MongoTarefasService, MongoUsuariosService],
+  exports: [MongoUsuariosService],
 })
 export class MongoModule {}
