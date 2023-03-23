@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-export const TarefasSchema = new mongoose.Schema(
+export const TarefaSchema = new mongoose.Schema(
   {
     nome: { type: String, required: true },
     descricao: { type: String },
@@ -10,6 +10,7 @@ export const TarefasSchema = new mongoose.Schema(
     archived: { type: Boolean, default: false, required: true },
   },
   {
+    timestamps: true,
     toJSON: {
       transform: (doc, ret) => {
         ret.id = ret._id;

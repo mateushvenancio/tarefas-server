@@ -1,13 +1,13 @@
 import { Controller, Post } from '@nestjs/common';
 
-@Controller('auth')
+@Controller()
 export class AuthController {
   @Post('login')
   login() {
     return 'login';
   }
-  @Post('register')
+  @Post('signup')
   register() {
-    return 'login';
+    return 'signup';
   }
 }
