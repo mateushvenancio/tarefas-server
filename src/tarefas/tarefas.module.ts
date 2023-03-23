@@ -1,13 +1,11 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose/dist';
-import { TarefasSchema } from 'src/schemes/tarefas.schema';
+import { AuthModule } from 'src/auth/auth.module';
+import { MongoModule } from 'src/mongo/mongo.module';
 import { TarefasController } from './tarefas.controller';
 import { TarefasService } from './tarefas.service';
 
 @Module({
-  imports: [
-    MongooseModule.forFeature([{ name: 'Tarefa', schema: TarefasSchema }]),
-  ],
+  imports: [MongoModule, AuthModule],
   controllers: [TarefasController],
   providers: [TarefasService],
 })

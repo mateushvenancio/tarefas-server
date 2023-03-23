@@ -1,26 +1,27 @@
 import {
   Controller,
   Get,
-  Param,
   HttpException,
   Post,
   Body,
+  UseGuards,
 } from '@nestjs/common';
 import { TarefasService } from './tarefas.service';
 import { CreateTarefaDto } from './dto/create_tarefa.dto';
 import { Delete, Put } from '@nestjs/common/decorators';
 import { TarefaEntity } from 'src/entities/tarefa.entity';
+import { GetUser } from 'src/auth/decorator/get-user.decorator';
+import { GetUserDto } from './dto/get-user.dto';
+import { JwtGuard } from 'src/auth/guards/jwt.guard';
 
 @Controller('tarefas')
 export class TarefasController {
   constructor(private tarefasService: TarefasService) {}
 
-  @Get('/:id')
-  async getTarefasByUser(@Param('id') id: string) {
-    if (!id) {
-      throw new HttpException('ID não informado', 400);
-    }
-    return await this.tarefasService.getByUserId(id);
+  @UseGuards(JwtGuard)
+  @Get()
+  async getTarefasByUser(@GetUser() req: GetUserDto) {
+    return await this.tarefasService.getByUserId(req.id);
   }
 
   @Post()
