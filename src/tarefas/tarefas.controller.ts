@@ -10,7 +10,6 @@ import { TarefasService } from './tarefas.service';
 import { CreateTarefaDto } from './dto/create_tarefa.dto';
 import { Delete, Put } from '@nestjs/common/decorators';
 import { TarefaEntity } from 'src/entities/tarefa.entity';
-import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from 'src/auth/decorator/get-user.decorator';
 import { GetUserDto } from './dto/get-user.dto';
 import { JwtGuard } from 'src/auth/guards/jwt.guard';
