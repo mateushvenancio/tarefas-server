@@ -24,42 +24,35 @@ export class TarefasController {
     return await this.tarefasService.getByUserId(req.id);
   }
 
+  @UseGuards(JwtGuard)
   @Post()
-  async createTarefa(@Body() body: CreateTarefaDto) {
-    if (!body.nome) {
-      throw new HttpException('Nome não informado', 400);
-    }
-    if (!body.descricao) {
-      throw new HttpException('Descrição não informada', 400);
-    }
-
-    body.userId = '111222333';
-
+  async createTarefa(
+    @Body() body: CreateTarefaDto,
+    @GetUser() req: GetUserDto,
+  ) {
+    body.userId = req.id;
     return await this.tarefasService.createTarefa(body);
   }
 
+  @UseGuards(JwtGuard)
   @Put()
-  async updateTarefa(@Body() body: TarefaEntity) {
+  async updateTarefa(@Body() body: TarefaEntity, @GetUser() req: GetUserDto) {
     const id = body.id;
 
-    if (!id) {
-      throw new HttpException('A tarefa não possui um ID', 400);
-    }
-
-    // properties i dont want to update
     delete body.id;
     delete body.userId;
     delete body.data;
 
-    await this.tarefasService.updateTarefa(id, body);
+    await this.tarefasService.updateTarefa(id, body, req.id);
   }
 
+  @UseGuards(JwtGuard)
   @Delete()
-  async deleteTarefa(@Body() body) {
+  async deleteTarefa(@Body() body, @GetUser() req: GetUserDto) {
     const id = body.id;
     if (!id) {
       throw new HttpException('ID não informado', 404);
     }
-    await this.tarefasService.deleteTarefa(id);
+    await this.tarefasService.deleteTarefa(id, req.id);
   }
 }

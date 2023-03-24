@@ -9,6 +9,10 @@ export class MongoTarefasService {
   constructor(
     @InjectModel('Tarefas') private readonly tarefasModel: Model<TarefaEntity>,
   ) {}
+  async getTarefaById(id: string): Promise<TarefaEntity> {
+    return await this.tarefasModel.findById(id);
+  }
+
   async getTarefasByUsuarioId(id: string): Promise<TarefaEntity[]> {
     const user = await this.tarefasModel.find({ userId: id });
     return user;
