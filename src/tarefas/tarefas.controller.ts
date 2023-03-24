@@ -11,7 +11,7 @@ import { CreateTarefaDto } from './dto/create_tarefa.dto';
 import { Delete, Put } from '@nestjs/common/decorators';
 import { TarefaEntity } from 'src/entities/tarefa.entity';
 import { GetUser } from 'src/auth/decorator/get-user.decorator';
-import { GetUserDto } from './dto/get-user.dto';
+import { GetUserDto } from '../auth/dto/get-user.dto';
 import { JwtGuard } from 'src/auth/guards/jwt.guard';
 
 @Controller('tarefas')
